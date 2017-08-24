@@ -9,7 +9,7 @@ import {Header} from 'react-native-elements';
 import Colors from './Colors';
 export default class SimpleHeader extends Component {
     static propTypes={
-        title:PropTypes.string
+        title:PropTypes.string,
     }
     render() {
         return (<View style={styles.simpleHeader}>
@@ -21,7 +21,7 @@ export default class SimpleHeader extends Component {
 }
 const styles=StyleSheet.create({
     simpleHeader:{
-        height:56
+        height:56,
     },
     title:{
         color:'#fff',

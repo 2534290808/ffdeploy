@@ -18,7 +18,7 @@ export default class InspType extends Component {
         return (<List containerStyle={styles.listContainer}>
             <InspTypeItem inspType={Constants.inspType.hydrant} title='消火栓' onPress={this._typePress.bind(this)}/>
             <InspTypeItem inspType={Constants.inspType.pump} title='水泵' onPress={this._typePress.bind(this)}/>
-            <InspTypeItem inspType={Constants.inspType.rollerDoor} title='防火卷帘门' onPress={this._typePress.bind(this)}/>
+            <InspTypeItem inspType={Constants.inspType.rollerDoor} title='消防门' onPress={this._typePress.bind(this)}/>
             <InspTypeItem inspType={Constants.inspType.other} title='其他' onPress={this._typePress.bind(this)}/>
         </List>)
     }

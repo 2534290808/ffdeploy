@@ -11,7 +11,8 @@ const Constants={
     color:{
         themeColor:'#ffcc03',
         underlayColor:'#ccc',
-        borderColor:"#cbd2d9"
+        borderColor:"#cbd2d9",
+        grey5:'#e1e8ee'
     },
     image:{
         scanBar:require('./images/scanBar.png')

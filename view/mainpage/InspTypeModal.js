@@ -12,12 +12,13 @@ export default class InspTypeModal extends Component {
         title: PropTypes.string,
         visible: PropTypes.bool,
         onNotContentPress: PropTypes.func,
-        typePress: PropTypes.func.isRequired
+        typePress: PropTypes.func.isRequired,
+        onBackButtonPress:PropTypes.func
 
     }
 
     render() {
-        return (<Modal style={{justifyContent: 'flex-end', margin: 0}} isVisible={this.props.visible}>
+        return (<Modal onBackButtonPress={()=>{this.props.onBackButtonPress?this.props.onBackButtonPress():null}} style={{justifyContent: 'flex-end', margin: 0}} isVisible={this.props.visible}>
             <TouchableWithoutFeedback onPress={() => {
                 this.props.onNotContentPress ? this.props.onNotContentPress() : null
             }}><View style={styles.modalNotContent}></View></TouchableWithoutFeedback>

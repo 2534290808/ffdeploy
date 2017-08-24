@@ -31,7 +31,7 @@ export default class MainContent extends Component {
     }
     render() {
         return (<View style={styles.mainContent}>
-            <InspTypeModal title='类型选择' typePress={(type)=>this._navigateQRScan(type)} visible={this.state.visible} onNotContentPress={this._hideModal.bind(this)}/>
+            <InspTypeModal title='类型选择' onBackButtonPress={this._hideModal.bind(this)} typePress={(type)=>this._navigateQRScan(type)} visible={this.state.visible} onNotContentPress={this._hideModal.bind(this)}/>
             <FontAwesome name="qrcode" size={200} color="black"/>
             <Button containerViewStyle={styles.btnContainer} raised title="点击扫描" onPress={this._showModal.bind(this)}
                     backgroundColor={Colors.appColor} borderRadius={5}/>

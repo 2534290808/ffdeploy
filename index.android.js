@@ -13,6 +13,9 @@ import {
 } from 'react-native';
 import App from "./App";
 import AppTest from './AppTest';
+import ModalTest from "./test/ModalTest";
+import {Button} from 'antd-mobile';
+import {SearchBar} from 'react-native-elements';
 export default class ffdeploy extends Component {
   render() {
     return (
