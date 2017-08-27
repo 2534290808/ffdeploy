@@ -18,11 +18,14 @@ export default class IconTabBar extends Component {
         tabIconNames: PropTypes.array,//保存的tab图标
         activeTabIconNames: PropTypes.array,//选择的tab图标
         tabColor: PropTypes.string,//tab的颜色
-        activeTabColor: PropTypes.string//选择的tab颜色
+        activeTabColor: PropTypes.string,//选择的tab颜色
+        haveIcon:PropTypes.bool,//是否有icon
+        tabContainerStyle:PropTypes.any,//
     }
     static defaultProps = {
         tabColor: '#5a5f6a',
-        activeTabColor: '#ff9933'
+        activeTabColor: '#ff9933',
+        haveIcon:true
     }
 
     setAnimationValue(value) {
@@ -37,16 +40,16 @@ export default class IconTabBar extends Component {
         let activeColor = this.props.activeTab === i ? this.props.activeTabColor : this.props.tabColor;// 判断i是否是当前选中的tab，设置不同的颜色
         return (<TouchableOpacity onPress={() => this.props.goToPage(i)} style={styles.tab} key={i}>
             <View style={styles.tabItem}>
-                <Icon
+                {this.props.haveIcon &&<Icon
                     name={this.props.activeTab === i && this.props.activeTabIconNames ? this.props.activeTabIconNames[i] : this.props.tabIconNames[i]}
-                    size={25} style={{color: activeColor}}/>
+                    size={25} style={{color: activeColor}}/>}
                 <Text style={{color: activeColor}}>{this.props.tabNames[i]}</Text>
             </View>
         </TouchableOpacity>)
     }
 
     render() {
-        return (<View style={styles.tabs}>{this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}</View>)
+        return (<View style={[styles.tabs,this.props.tabContainerStyle]}>{this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}</View>)
     }
 }
 const styles = StyleSheet.create({

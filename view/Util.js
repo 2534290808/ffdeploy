@@ -11,7 +11,7 @@ const Util = {
         width: Dimensions.get('window').width,//得到屏幕的宽度
         height: Dimensions.get('window').height//得到屏幕的高度
     },
-    post(url, data, onSuccess, onError){
+    post(url, data){
         let fetchOptions = {
             method: 'POST',
             headers: {
@@ -20,13 +20,15 @@ const Util = {
             },
             body: JSON.stringify(data)
         };
-        fetch(url, fetchOptions).then((response) => response.json()).then(
-            (responseJson) => {
-                onSuccess(responseJson)
-            }
-        ).catch((e) => {
-            onError(e)
-        })
+        return new Promise((resolve,reject)=>{
+            fetch(url, fetchOptions).then((response) => response.json()).then(
+                (responseJson) => {
+                    resolve(responseJson)
+                }
+            ).catch((e) => {
+                reject(e)
+            })
+        });
     },
     key: 'BDKHFSDKJFHSDKFHWEFH-REACT-NATIVE'
 }

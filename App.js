@@ -7,9 +7,11 @@ import PropTypes from 'prop-types';
 import Constants from './view/Constants';
 import MainScreen from "./view/screen/MainScreen";
 import QRScanScreen from './view/screen/QRScanScreen'
+import DetailDownloadScreen from './view/screen/DetailDownloadScreen'
 import {StackNavigator} from 'react-navigation';
 const App=StackNavigator({
     "Main":{screen:MainScreen},
-    'QRScan':{screen:QRScanScreen}
+    'QRScan':{screen:QRScanScreen},
+    'DetailDownload':{screen:DetailDownloadScreen}
 })
 export default App;

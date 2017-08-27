@@ -37,7 +37,7 @@ export default class MainScreen extends Component{
   render(){
       return(<ScrollableView tabBarPosition="bottom" renderTabBar={()=>this._renderTabBar()}>
           <MainPage tabLabel="1" navigation={this.props.navigation}/>
-          <DownLoadPage tabLabel="2"/>
+          <DownLoadPage tabLabel="2" navigation={this.props.navigation}/>
          <UploadPage tabLabel="3"/>
       </ScrollableView>)
   }

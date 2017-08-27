@@ -19,7 +19,8 @@ const Constants={
     },
     screen:{
         Main:'Main',
-        QRScan:'QRScan'
+        QRScan:'QRScan',
+        DetailDownload:'DetailDownload'
     }
 }
 export default Constants;

@@ -11,7 +11,8 @@ export default class SimpleSearchBar extends Component {
     static propTypes = {
         leftIconPress: PropTypes.func,
         onChangeText: PropTypes.func,
-        rightBtnPress: PropTypes.func
+        rightBtnPress: PropTypes.func,
+        autoFocus:PropTypes.bool,
     }
 
     _leftIconPress() {
@@ -31,6 +32,7 @@ export default class SimpleSearchBar extends Component {
             <View style={styles.searchBar}><TouchableNativeFeedback onPress={this._leftIconPress.bind(this)}><View
                 style={styles.leftIcon}>
                 <Icon name="md-menu" type="ionicon"/></View></TouchableNativeFeedback><SearchBar
+                autoFocus={this.props.autoFocus}
                 containerStyle={{flex: 1}}
                 lightTheme
                 inputStyle={{backgroundColor: '#fff'}}

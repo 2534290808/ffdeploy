@@ -4,23 +4,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View, Button, ScrollView
 } from 'react-native';
 import App from "./App";
-import AppTest from './AppTest';
-import ModalTest from "./test/ModalTest";
-import {Button} from 'antd-mobile';
-import {SearchBar} from 'react-native-elements';
+import SvgUriTest from "./test/SvgUriTest";
+import Hydrant_Svg from "./view/images/Hydrant_Svg";
+import City_Svg from "./view/images/City_Svg";
 export default class ffdeploy extends Component {
-  render() {
-    return (
-      <App/>
-    );
-  }
+
+    render() {
+        return (<App/>);
+    }
 }
 AppRegistry.registerComponent('ffdeploy', () => ffdeploy);
