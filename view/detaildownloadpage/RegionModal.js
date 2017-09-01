@@ -2,7 +2,7 @@
  * Created by lmy2534290808 on 2017/8/25.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableWithoutFeedback, TouchableNativeFeedback,ToastAndroid} from 'react-native';
+import {StyleSheet, View, Text, TouchableWithoutFeedback, TouchableNativeFeedback, ToastAndroid} from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import Util from '../Util';
@@ -12,14 +12,17 @@ export default class RegionModal extends Component {
         super(props);
         this.state = {
             visible: props.visible ? props.visible : false,
-            itemData:null
+            countyItemData: null,
+            provinceName: null,
+            cityName: null
 
         }
     }
 
     static propTypes = {
         visible: PropTypes.bool,
-        onCountySelected: PropTypes.func
+        onOK: PropTypes.func,
+        onModalHide:PropTypes.func
     }
 
     _hideModal() {
@@ -27,20 +30,26 @@ export default class RegionModal extends Component {
     }
 
     _certainPress() {
-      if(this.state.itemData && this.state.itemData.id>0){
-          console.warn(JSON.stringify(this.state.itemData));
-          this._hideModal()
-          this.setState({itemData:null})
-      }else {
-          ToastAndroid.show('不合法选择', ToastAndroid.SHORT);
-      }
+        if (this.state.countyItemData && this.state.countyItemData.id > 0) {
+            this.setState({countyItemData: null})
+            this.props.onOK ? this.props.onOK({
+                provinceName: this.state.provinceName,
+                cityName: this.state.cityName,
+                countyData: this.state.countyItemData
+            }) : null;
+        } else {
+            ToastAndroid.show('不合法选择', ToastAndroid.SHORT);
+        }
     }
+
     componentWillReceiveProps(nextProps) {
         this.setState({visible: nextProps.visible})
     }
-
+    _onModalHide(){
+        this.props.onModalHide?this.props.onModalHide():null;
+    }
     render() {
-        return (<Modal onBackButtonPress={this._hideModal.bind(this)} style={{justifyContent: 'flex-end', margin: 0}}
+        return (<Modal onModalHide={this.props.onModalHide.bind(this)} onBackButtonPress={this._hideModal.bind(this)} style={{justifyContent: 'flex-end', margin: 0}}
                        isVisible={this.state.visible}>
             <TouchableWithoutFeedback onPress={this._hideModal.bind(this)}><View style={styles.modalNotContent}></View></TouchableWithoutFeedback>
             <View style={styles.modalContent}>
@@ -52,7 +61,13 @@ export default class RegionModal extends Component {
                     <TouchableNativeFeedback onPress={this._certainPress.bind(this)}><View
                         style={styles.modalBarCertain}><Text
                         style={styles.modalBarText}>确定</Text></View></TouchableNativeFeedback></View>
-              <RegionPicker onProvinceSelected={()=>{this.setState({itemData:null})}} onCitySelected={()=>{this.setState({itemData:null})}} onCountySelected={(item)=>{this.setState({itemData:item.data})}}/>
+                <RegionPicker onProvinceSelected={(item) => {
+                    this.setState({countyPosition: null, provinceName: item.data.name})
+                }} onCitySelected={(item) => {
+                    this.setState({countyItemData: null, cityName: item.data.name})
+                }} onCountySelected={(item) => {
+                    this.setState({countyItemData: item.data})
+                }}/>
             </View>
         </Modal>)
     }

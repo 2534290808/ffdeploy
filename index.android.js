@@ -9,12 +9,10 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View, Button, ScrollView
+    View, Button, ScrollView,TextInput
 } from 'react-native';
 import App from "./App";
-import SvgUriTest from "./test/SvgUriTest";
-import Hydrant_Svg from "./view/images/Hydrant_Svg";
-import City_Svg from "./view/images/City_Svg";
+import ExtinguisherDeploy from "./view/extinguisherdeploy/ExtinguisherDeploy";
 export default class ffdeploy extends Component {
 
     render() {

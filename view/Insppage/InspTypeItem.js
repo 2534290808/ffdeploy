@@ -13,12 +13,14 @@ export default class InspTypeItem extends Component {
         title: PropTypes.string,
         onPress: PropTypes.func,
         iconName: PropTypes.string,
-        inspType:PropTypes.number.isRequired,
-        leftIcon:PropTypes.any
+        inspType: PropTypes.number.isRequired,
+        leftIcon: PropTypes.any
     }
-    _onPress(){
-       this.props.onPress?this.props.onPress(this.props.inspType):null
+
+    _onPress() {
+        this.props.onPress ? this.props.onPress({inspType: this.props.inspType, title: this.props.title}) : null
     }
+
     render() {
         return (<ListItem underlayColor={Colors.underlayColor} containerStyle={styles.listItem} hideChevron
                           leftIcon={this.props.leftIcon}

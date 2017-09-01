@@ -10,8 +10,6 @@ import Constants from '../Constants';
 export default class DetailDownloadScreen extends Component {
     static navigationOptions = {
         headerTitle: '下载',
-        headerStyle: {backgroundColor: Constants.color.themeColor},
-        headerTitleStyle:{color:"#fff"}
     }
 
     render() {

@@ -10,7 +10,8 @@ import {Button} from 'react-native-elements';
 import Colors from '../Colors';
 import InspTypeModal from "./InspTypeModal";
 import Constants from '../Constants';
-export default class MainContent extends Component {
+import LoadingButton from "../LoadingButton";
+export default class InspPage extends Component {
     constructor() {
         super();
         this.state = {
@@ -25,24 +26,25 @@ export default class MainContent extends Component {
     _hideModal() {
         this.setState({visible: false})
     }
-    _navigateQRScan(type){
+    _navigateQRScan(params){
         this._hideModal();
-        this.props.navigation.navigate(Constants.screen.QRScan,{inspType:type});
+        let {inspType,title}=params;
+        this.props.navigation.navigate(Constants.screen.QRScan,{inspType:inspType,title:title});
     }
     render() {
         return (<View style={styles.mainContent}>
-            <InspTypeModal title='类型选择' onBackButtonPress={this._hideModal.bind(this)} typePress={(type)=>this._navigateQRScan(type)} visible={this.state.visible} onNotContentPress={this._hideModal.bind(this)}/>
+            <InspTypeModal title='类型选择' onBackButtonPress={this._hideModal.bind(this)} typePress={(params)=>this._navigateQRScan(params)} visible={this.state.visible} onNotContentPress={this._hideModal.bind(this)}/>
             <FontAwesome name="qrcode" size={200} color="black"/>
-            <Button containerViewStyle={styles.btnContainer} raised title="点击扫描" onPress={this._showModal.bind(this)}
+            <Button containerViewStyle={styles.btnContainer} title="点击扫描" onPress={this._showModal.bind(this)}
                     backgroundColor={Colors.appColor} borderRadius={5}/>
         </View>)
     }
 }
 const styles = StyleSheet.create({
     mainContent: {
-        justifyContent: 'center', alignItems: 'center', height: Util.size.height - 112,backgroundColor:'#fff'
+        justifyContent: 'center', alignItems: 'center', flex:1,backgroundColor:'#fff'
     },
     btnContainer: {
-        backgroundColor: 'transparent'
+        elevation:3
     }
 })
