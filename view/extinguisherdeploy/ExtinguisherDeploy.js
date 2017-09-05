@@ -2,14 +2,15 @@
  * Created by lmy2534290808 on 2017/8/31.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, DatePickerAndroid, Keyboard} from 'react-native';
+import {StyleSheet, View, Text, DatePickerAndroid, Keyboard,ToastAndroid} from 'react-native';
 import PropTypes from 'prop-types';
 import NativeInput from "../deploy/NativeInput";
 import NativeDatePicker from "./NativeDatePicker";
 import NativePicker from "../deploy/NativePicker";
 import ProjectSqlUtil from '../ProjectSqlUtil';
 import LoadingButton from "../LoadingButton";
-import {Toast} from 'antd-mobile';
+import Util from '../Util';
+import {Toast} from 'antd-mobile'
 export default class ExtinguisherDeploy extends Component {
     static navigationOptions = {
         title: '灭火器'
@@ -34,10 +35,9 @@ export default class ExtinguisherDeploy extends Component {
             console.warn(JSON.stringify(e))
         })
         storage.load({key:'extinguisherInfo'}).then((res)=>{
-            let {name,dateValue}=res;
+            let {name}=res;
             this.setState({
                 name:name,
-                dateValue:dateValue
             })
         }).catch(()=>{})
     }
@@ -46,13 +46,22 @@ export default class ExtinguisherDeploy extends Component {
         let ps = new ProjectSqlUtil(), json = {
             name: this.state.name,
             qrCode: this.props.navigation.state.params.qrCode,
-            dateValue: this.state.dateValue
+            dateValue: this.state.dateValue,
+            extinguisherType:this.state.extinguisherType
         };
         storage.save({
             key:'extinguisherInfo',
-            data:json,
+            data:{name:this.state.name},
         })
-        ps.insertExtinguisherInfo(json).then(()=>{Toast.success('保存成功')}).catch(()=>{Toast.fail('保存失败')})
+        ps.extinguisherInfoIsExist(json).then(res=>{
+            let num =res.rows.item(0).num;
+            if(num==0){
+                ps.insertExtinguisherInfo(json).then(()=>{Toast.success('保存成功')}).catch(()=>{Toast.fail('保存失败')})
+            }else{
+                Util.showToast('该灭火器已经存在')
+            }
+        })
+
     }
 
     render() {

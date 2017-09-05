@@ -32,6 +32,9 @@ const Constants = {
     },
     actions: {
         toMainAction: NavigationActions.reset({index:0,actions:[NavigationActions.navigate({routeName:'Main'})]})
+    },
+    url:{
+        base:'http://192.168.124.6:8080/FFInsp'
     }
 }
 export default Constants;

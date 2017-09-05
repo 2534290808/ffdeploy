@@ -11,26 +11,30 @@ import Hydrant_Svg from "../images/Hydrant_Svg";
 export default class InspTypeItem extends Component {
     static propTypes = {
         title: PropTypes.string,
-        onPress: PropTypes.func,
+        onPress: PropTypes.func.isRequired,
         iconName: PropTypes.string,
         inspType: PropTypes.number.isRequired,
         leftIcon: PropTypes.any
     }
-
+   constructor(props){
+        super(props)
+       this._onPress=this._onPress.bind(this);
+   }
     _onPress() {
-        this.props.onPress ? this.props.onPress({inspType: this.props.inspType, title: this.props.title}) : null
+        this.props.onPress({inspType: this.props.inspType, title: this.props.title})
     }
 
     render() {
         return (<ListItem underlayColor={Colors.underlayColor} containerStyle={styles.listItem} hideChevron
                           leftIcon={this.props.leftIcon}
                           title={this.props.title}
-                          onPress={this._onPress.bind(this)}/>)
+                          onPress={this._onPress}/>)
     }
 }
 const styles = StyleSheet.create({
     listItem: {
         borderBottomWidth: Util.pixel,
-        borderBottomColor: '#ccc'
+        borderBottomColor: '#ccc',
+        borderTopWidth:0
     }
 })

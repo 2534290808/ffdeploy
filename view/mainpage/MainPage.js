@@ -54,7 +54,8 @@ export default class MainPage extends Component {
                 regionName: regionName,
                 buildingName: buildingName,
                 buildingTypeValue: buildingTypeValue,
-                riskGradeValue: riskGradeValue
+                riskGradeValue: riskGradeValue,
+                regionId:regionId
             })
         }).catch(() => {
         })

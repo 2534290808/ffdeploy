@@ -3,7 +3,7 @@
  * 工具类
  */
 import React from 'react';
-import {PixelRatio, Dimensions} from 'react-native';
+import {PixelRatio, Dimensions,ToastAndroid} from 'react-native';
 const Util = {
     ratio: PixelRatio.get(),
     pixel: 1 / PixelRatio.get(),
@@ -15,12 +15,13 @@ const Util = {
         let fetchOptions = {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                /*'Accept': 'application/json',
+                'Content-Type': 'application/json'*/
             },
-            body: JSON.stringify(data)
+            body: data
         };
-        return new Promise((resolve,reject)=>{
+       // console.warn(JSON.stringify(data));
+        return new Promise((resolve, reject) => {
             fetch(url, fetchOptions).then((response) => response.json()).then(
                 (responseJson) => {
                     resolve(responseJson)
@@ -30,6 +31,39 @@ const Util = {
             })
         });
     },
-    key: 'BDKHFSDKJFHSDKFHWEFH-REACT-NATIVE'
+    // 得到批量上传的所需的json,通过ajax上传到struts2中的action
+    getJsonForBatchUpload(jsonArray, str) {
+        var strJSON = "{";
+        var len = jsonArray.length;
+        var json;
+        if (len > 0) {
+            json = jsonArray[0];
+            for (var i = 0; i < len; i++) {
+                var row = jsonArray[i];
+                for (var x in json) {
+                    var tempStr;
+                    if (typeof (row[x]) !== 'number') {
+                        tempStr = '\":\"' + row[x] + '\"';
+                    } else {
+                        tempStr = '\":' + row[x];
+                    }
+                    if (strJSON !== "{") {
+                        strJSON += ',\"' + str + '[' + i + '].' + x + tempStr;
+                    } else {
+                        strJSON += '\"' + str + '[' + i + '].' + x + tempStr;
+                    }
+                }
+            }
+            strJSON += "}";
+            console.log(strJSON);
+            return JSON.parse(strJSON);
+        }
+        return {}
+    },
+    key: 'BDKHFSDKJFHSDKFHWEFH-REACT-NATIVE',
+    showToast(msg){
+        ToastAndroid.show(msg,ToastAndroid.SHORT);
+    },
+
 }
 export default Util;

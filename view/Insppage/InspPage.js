@@ -27,9 +27,9 @@ export default class InspPage extends Component {
         this.setState({visible: false})
     }
     _navigateQRScan(params){
-        this._hideModal();
         let {inspType,title}=params;
         this.props.navigation.navigate(Constants.screen.QRScan,{inspType:inspType,title:title});
+        this._hideModal();
     }
     render() {
         return (<View style={styles.mainContent}>

@@ -22,7 +22,7 @@ export default class DeployPage extends Component {
             sprayValue: 1,
             floor: '',
             name: '',
-            vibrationCode: '',
+            vibrationCode:'',
             openCode: '',
             closeCode: ''
         }
@@ -31,32 +31,22 @@ export default class DeployPage extends Component {
 
     componentDidMount() {
         storage.load({key: Constants.storage_key.detailData}).then((res) => {
-            let {floor, name, waterBagValue, sprayValue, openCode, closeCode, vibrationCode} = res;
+            let {floor, name} = res;
             this.setState({
                 floor: floor,
                 name: name,
-                waterBagValue: waterBagValue,
-                sprayValue: sprayValue,
-                openCode: openCode,
-                closeCode: closeCode,
-                vibrationCode: vibrationCode
             })
         }).catch(() => {
         })
     }
 
     _saveData() {
-        let {floor, name, waterBagValue, sprayValue, openCode, closeCode, vibrationCode} = this.state;
+        let {floor, name} = this.state;
         storage.save({
             key: 'detailData',
             data: {
                 floor: floor,
                 name: name,
-                waterBagValue: waterBagValue,
-                sprayValue: sprayValue,
-                openCode: openCode,
-                closeCode: closeCode,
-                vibrationCode: vibrationCode
             }
         })
         storage.load({key: Constants.storage_key.baseData}).then((res) => {
