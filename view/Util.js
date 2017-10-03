@@ -3,7 +3,8 @@
  * 工具类
  */
 import React from 'react';
-import {PixelRatio, Dimensions,ToastAndroid} from 'react-native';
+import {PixelRatio, Dimensions, ToastAndroid} from 'react-native';
+import BleManager from 'react-native-ble-manager';
 const Util = {
     ratio: PixelRatio.get(),
     pixel: 1 / PixelRatio.get(),
@@ -16,11 +17,11 @@ const Util = {
             method: 'POST',
             headers: {
                 /*'Accept': 'application/json',
-                'Content-Type': 'application/json'*/
+                 'Content-Type': 'application/json'*/
             },
             body: data
         };
-       // console.warn(JSON.stringify(data));
+        // console.warn(JSON.stringify(data));
         return new Promise((resolve, reject) => {
             fetch(url, fetchOptions).then((response) => response.json()).then(
                 (responseJson) => {
@@ -62,7 +63,58 @@ const Util = {
     },
     key: 'BDKHFSDKJFHSDKFHWEFH-REACT-NATIVE',
     showToast(msg){
-        ToastAndroid.show(msg,ToastAndroid.SHORT);
+        ToastAndroid.show(msg, ToastAndroid.SHORT);
+    },
+    /**
+     * 将一个字节转换为十六进制的字符串
+     * @param byte
+     * @returns {string}
+     */
+    byteToHexString(byte){
+        let hexStr = ((byte + 256) % 256).toString(16)
+        return hexStr.length == 1 ? '0' + hexStr : hexStr;
+    },
+    startBleNotify(bleAddress){
+        BleManager.isPeripheralConnected(bleAddress).then(isConnected => {
+            if (isConnected) {
+                BleManager.retrieveServices(bleAddress).then((info) => {
+                    let serviceUUID, characterUUID;
+                    for (var item of info.characteristics) {
+                        let {Notify} = item.properties;
+                        if (Notify) {
+                            serviceUUID = item.service;
+                            characterUUID = item.characteristic;
+                            break;
+                        }
+                    }
+                    BleManager.startNotification(bleAddress, serviceUUID, characterUUID).then(() => {
+                        //ToastAndroid.show('打开通知成功', ToastAndroid.LONG);
+                    }).catch(() => {
+                        // ToastAndroid.show('打开通知失败', ToastAndroid.LONG);
+                    })
+                })
+            }
+        }).catch(e => e)
+    },
+    sendBleCharData(bleAddress, char){
+        return new Promise((resolve, reject) => {
+            BleManager.retrieveServices(bleAddress).then((info) => {
+                let serviceUUID, characterUUID;
+                for (var item of info.characteristics) {
+                    let {Notify, WriteWithoutResponse} = item.properties;
+                    if (WriteWithoutResponse && Notify) {
+                        serviceUUID = item.service;
+                        characterUUID = item.characteristic
+                        break;
+                    }
+                }
+                BleManager.writeWithoutResponse(bleAddress, serviceUUID, characterUUID, [char.trim().charCodeAt(0)]).then(() => {
+                    resolve();
+                    console.warn('写入成功');
+                    //ToastAndroid.show('写入成功',ToastAndroid.LONG)
+                }).catch((e) => reject(e))
+            })
+        })
     },
 
 }

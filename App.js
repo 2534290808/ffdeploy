@@ -23,10 +23,10 @@ const App = StackNavigator({
 }, {
     navigationOptions:({navigation})=>({
         headerStyle: {backgroundColor: '#ffcc03',},
-        headerTitleStyle: {color: '#fff'},
+        headerTitleStyle: {color: '#fff',fontWeight:'normal'},
         headerTintColor: '#fff',
-        headerRight: <TouchableNativeFeedback onPress={()=>{navigation.dispatch(Constants.actions.toMainAction)}}><View style={{flex:1,justifyContent:'center',alignItems:'center',width:56}}><Icon name="md-close" type="ionicon"
-                                                          color="#fff"/></View></TouchableNativeFeedback>,
+        //headerRight: <TouchableNativeFeedback onPress={()=>{navigation.dispatch(Constants.actions.toMainAction)}}><View style={{flex:1,justifyContent:'center',alignItems:'center',width:56}}><Icon name="md-close" type="ionicon"
+                                                          //color="#fff"/></View></TouchableNativeFeedback>,
     })
 })
 export default App;

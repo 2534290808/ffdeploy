@@ -15,13 +15,14 @@ export default class QRScanScreen extends Component {
 
     _sendHydrant(rec) {
         let {inspType,title}=this.props.navigation.state.params;
-        let action = NavigationActions.reset({
+        /*let action = NavigationActions.reset({
             index: 2,
             actions: [NavigationActions.navigate({routeName: Constants.screen.Main}),
                 NavigationActions.navigate({routeName:Constants.screen.InspMain}),
             NavigationActions.navigate({routeName:Constants.screen.Deploy,params:{inspType:inspType,title:title,qrCode:rec.data}})]
         })
-            this.props.navigation.dispatch(action)
+            this.props.navigation.dispatch(action)*/
+
     }
 
     render() {

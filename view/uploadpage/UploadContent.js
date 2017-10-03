@@ -33,17 +33,20 @@ export default class UploadContent extends Component {
         }
         return new Promise((resolve, reject) => {
             ps.getEquipmentInfos().then(data => {
+                if(data._parts.length>0){
                 Util.post(Constants.url.base + "/addEquipments", data).then(res => {
                     if (res.success >= 1) {
                         resolve()
                     } else {
-                        resolve({error: 'insert data is failed'})
+                        reject({error: 'insert data is failed'})
                     }
                 }).catch(e => {
                     reject(e)
-                })
+                })}else{
+                    resolve();
+                }
             }).catch(e => {
-                reject(e)
+                reject(e);console.warn(e)
             })
         })
     }
@@ -54,6 +57,7 @@ export default class UploadContent extends Component {
         }
         return new Promise((resolve, reject) => {
             ps.getExtinguisherInfos().then(data => {
+                if(data._parts.length>0){
                 Util.post(Constants.url.base + "/addExtinguishers", data).then(res => {
                     if (res.success >= 1) {
                         resolve()
@@ -62,7 +66,9 @@ export default class UploadContent extends Component {
                     }
                 }).catch(e => {
                     reject(e)
-                })
+                })}else{
+                    resolve();
+                }
             }).catch(e => {
                 reject(e)
             })
@@ -83,8 +89,8 @@ export default class UploadContent extends Component {
                        Util.showToast('上传成功')
                        this._updateCard();
                        this.setState({loading:false})
-                   }).catch(()=>{Util.showToast('上传失败')})
-                }).catch(()=>{Util.showToast('上传失败')})
+                   }).catch(()=>{Util.showToast('上传失败');this.setState({loading:false})})
+                }).catch(()=>{Util.showToast('上传失败');this.setState({loading:false})})
             }else{
                 Util.showToast('网络不稳定')
             }
@@ -125,7 +131,6 @@ export default class UploadContent extends Component {
             <Card title='数据概况'
                   titleStyle={{fontSize: 20}}><Text>部署：巡检点数：{this.state.inspCount}，灭火器数：{this.state.extinguisherCount}</Text></Card>
             <LoadingButton loading={this.state.loading} style={{marginTop: 10}} onPress={this._uploadData} title='上传'/>
-            <LoadingButton title="删除" onPress={this._deleteData}/>
         </View>)
     }
 }

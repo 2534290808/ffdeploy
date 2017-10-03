@@ -12,7 +12,7 @@ export default class QRScanView extends Component {
         barcodeReceived: PropTypes.func.isRequired,
     }
    componentDidMount(){
-        setTimeout(()=>{if(this.props.barcodeReceived)this.props.barcodeReceived({data:'12345'});},5000);
+        setTimeout(()=>{if(this.props.barcodeReceived)this.props.barcodeReceived({data:'12345'});},2000);
    }
     render() {
         return (

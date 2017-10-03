@@ -12,6 +12,8 @@ import MainPage from "../mainpage/MainPage";
 import DownLoadPage from "../downloadpage/DownLoadPage";
 import UploadPage from "../uploadpage/UploadPage";
 import Entrance from "../Entrance";
+import Setting from "../settings/Setting";
+import SplashScreen from 'react-native-splash-screen'
 let firstClick=0;
 export default class MainScreen extends Component {
     static navigationOptions = {
@@ -31,6 +33,7 @@ export default class MainScreen extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._handleBack)
+        SplashScreen.hide();
     }
 
     componentWillUnmount() {
