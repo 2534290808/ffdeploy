@@ -110,9 +110,6 @@ export default class MainPage extends Component {
                BleManager.disconnect(bleAddress).then(() => {
                    console.warn('断开连接')
                }).catch(e => e)
-           } else {
-               console.warn('removePeripheral时蓝牙没有连接:'+bleAddress)
-               BleManager.removePeripheral(bleAddress).then(res=>console.warn('remove成功')).catch(e=>console.warn(JSON.stringify(e)))
            }
        }).catch(e => console.warn(JSON.stringify(e)))
    }
@@ -178,8 +175,7 @@ export default class MainPage extends Component {
             if (bleEnabled) {
                 ToastAndroid.show('蓝牙已经打开', ToastAndroid.SHORT);
             } else {
-                BleManager.enableBluetooth().then(() => {
-                })
+                BleManager.enableBluetooth()
             }
         } else {
             if (bleEnabled) {

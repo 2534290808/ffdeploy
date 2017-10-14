@@ -2,7 +2,7 @@
  * Created by lmy2534290808 on 2017/8/31.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, DatePickerAndroid, Keyboard,ToastAndroid} from 'react-native';
+import {StyleSheet, View, Text, DatePickerAndroid, Keyboard,ToastAndroid,DeviceEventEmitter} from 'react-native';
 import PropTypes from 'prop-types';
 import NativeInput from "../deploy/NativeInput";
 import NativeDatePicker from "./NativeDatePicker";
@@ -56,7 +56,9 @@ export default class ExtinguisherDeploy extends Component {
         ps.extinguisherInfoIsExist(json).then(res=>{
             let num =res.rows.item(0).num;
             if(num==0){
-                ps.insertExtinguisherInfo(json).then(()=>{Toast.success('保存成功')}).catch(()=>{Toast.fail('保存失败')})
+                ps.insertExtinguisherInfo(json).then(()=>{
+                    DeviceEventEmitter.emit('savedEvent','');
+                    Toast.success('保存成功')}).catch(()=>{Toast.fail('保存失败')})
             }else{
                 Util.showToast('该灭火器已经存在')
             }

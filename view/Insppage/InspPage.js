@@ -10,11 +10,11 @@ import {Button} from 'react-native-elements';
 import Colors from '../Colors';
 import InspTypeModal from "./InspTypeModal";
 import Constants from '../Constants';
-import LoadingButton from "../LoadingButton";
 import Modal from 'react-native-modal';
 import QRScanView from "../qrscanpage/QRScanView";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AppBar from "../AppBar";
+import QRScanView1 from "../qrscanpage/QRScanView1";
 export default class InspPage extends Component {
     constructor() {
         super();
@@ -78,7 +78,7 @@ export default class InspPage extends Component {
         return (<View style={styles.mainContent}>
             <Modal style={styles.qrModalContainer} isVisible={qrVisible} animationIn="fadeIn" animationOut="fadeOut" onBackButtonPress={this._hideQrModal}>
                 <Icon.ToolbarAndroid onIconClicked={this._hideQrModal} style={{height:56,backgroundColor:'#ffcc03',elevation:4}} navIconName="arrow-back" iconColor="#fff" title="扫描" titleColor="#fff"/>
-                <QRScanView barcodeReceived={this._sendDeploy}/>
+                <QRScanView1 barcodeReceived={this._sendDeploy}/>
             </Modal>
             <InspTypeModal title='类型选择' onBackButtonPress={this._hideTypeModal} typePress={this._navigateQRScan} visible={typeVisible} onNotContentPress={this._hideTypeModal}/>
             <FontAwesome name="qrcode" size={200} color="black"/>

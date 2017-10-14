@@ -2,7 +2,7 @@
  * Created by lmy2534290808 on 2017/8/28.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, NativeAppEventEmitter, ToastAndroid} from 'react-native';
+import {StyleSheet, View, Text, TextInput, NativeAppEventEmitter, ToastAndroid,DeviceEventEmitter} from 'react-native';
 import {InputItem} from 'antd-mobile';
 import {NavigationActions} from 'react-navigation';
 import LoadingButton from "../LoadingButton";
@@ -129,6 +129,7 @@ export default class DeployPage extends Component {
             }
             if (ps) {
                 ps.insertEquipment(jsonParams).then(() => {
+                    DeviceEventEmitter.emit('savedEvent','');
                     inspType == 1 ? this.props.navigation.navigate(Constants.screen.ExtinguisherDeploy, {qrCode: qrCode}) : this.props.navigation.goBack();
                 }).catch((e) => {
                     ToastAndroid.show('保存失败', ToastAndroid.SHORT)
@@ -172,7 +173,7 @@ export default class DeployPage extends Component {
                     {inspType == 1 ?
                         <View><NativePicker selectedValue={this.state.waterBagValue} onValueChange={(value) => {
                             this.setState({waterBagValue: value})
-                        }} label='存在水袋' data={this.state.waterBag}/><NativePicker selectedValue={this.state.sprayValue}
+                        }} label='存在水带' data={this.state.waterBag}/><NativePicker selectedValue={this.state.sprayValue}
                                                                                   data={this.state.spray}
                                                                                   onValueChange={(value) => {
                                                                                       this.setState({sprayValue: value})

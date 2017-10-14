@@ -2,7 +2,7 @@
  * Created by lmy2534290808 on 2017/8/31.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, ScrollView, ToastAndroid, NetInfo} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, ToastAndroid, NetInfo,DeviceEventEmitter} from 'react-native';
 import PropTypes from 'prop-types';
 import {Card} from 'react-native-elements'
 import LoadingButton from "../LoadingButton";
@@ -25,8 +25,13 @@ export default class UploadContent extends Component {
 
     componentDidMount() {
         this._updateCard();
+        this.saved = DeviceEventEmitter.addListener('savedEvent',() =>{
+            this._updateCard();
+        })
     }
-
+    componentWillUnmount(){
+        this.saved.remove();
+    }
     _uploadEquipment() {
         if (ps) {
             ps = new ProjectSqlUtil();
@@ -129,7 +134,7 @@ export default class UploadContent extends Component {
     render() {
         return (<View>
             <Card title='数据概况'
-                  titleStyle={{fontSize: 20}}><Text>部署：巡检点数：{this.state.inspCount}，灭火器数：{this.state.extinguisherCount}</Text></Card>
+                  titleStyle={{fontSize: 20}}><Text>巡检点数：{this.state.inspCount}，灭火器数：{this.state.extinguisherCount}</Text></Card>
             <LoadingButton loading={this.state.loading} style={{marginTop: 10}} onPress={this._uploadData} title='上传'/>
         </View>)
     }

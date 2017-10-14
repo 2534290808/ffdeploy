@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import App from "./App";
 import ExtinguisherDeploy from "./view/extinguisherdeploy/ExtinguisherDeploy";
+import QRScanView from "./view/qrscanpage/QRScanView";
+import QRScanView1 from "./view/qrscanpage/QRScanView1";
 export default class ffdeploy extends Component {
 
     render() {
