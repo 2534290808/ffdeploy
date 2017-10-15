@@ -2,7 +2,7 @@
  * Created by lmy2534290808 on 2017/8/28.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, NativeAppEventEmitter, ToastAndroid,DeviceEventEmitter} from 'react-native';
+import {StyleSheet, View, Text, TextInput, NativeAppEventEmitter, ToastAndroid, DeviceEventEmitter} from 'react-native';
 import {InputItem} from 'antd-mobile';
 import {NavigationActions} from 'react-navigation';
 import LoadingButton from "../LoadingButton";
@@ -63,38 +63,32 @@ export default class DeployPage extends Component {
     }
 
     _handleDidUpdateValue(args) {
-       // console.warn(JSON.stringify(args));
+        // console.warn(JSON.stringify(args));
         //ToastAndroid.show('通知了', ToastAndroid.SHORT)
         let value = args.value, len = value.length;
         let {sendType} = this.state;
-        if (sendType === 't') {
-            if (len == 12) {
-                let time = value.slice(1, 9), card = [value[9], value[10], value[11]];
-                let cardStr = parseInt(card.map((v) => Util.byteToHexString(v)).join(''), 16) + '',
-                    timeStr = String.fromCharCode(...time)
-                this.setState({vibrationCode: cardStr})
-            } else {
-                this.setState({vibrationCode: '获取失败'})
-            }
-        }else if(sendType=='o'){
+        if (sendType == 'o') {
             if (len == 7) {
                 let card1 = [value[1], value[2], value[3]], card2 = [value[4], value[5], value[6]];
-                let card1Str = parseInt(card1.map((v) => Util.byteToHexString(v)).join(''), 16) + '';
-                let card2Str = parseInt(card2.map((v) => Util.byteToHexString(v)).join(''), 16) + ''
+                let card1Str = parseInt(card1.map((v) => Util.byteToHexString(v)).join(''), 16);
+                let card2Str = parseInt(card2.map((v) => Util.byteToHexString(v)).join(''), 16);
+                this.props.vibrationCode == '获取中' && this.setState({vibrationCode: card2Str + card1Str})
                 this.setState({openCode: card1Str + '-' + card2Str})
-            }else{
-                this.setState({openCode:'获取失败'})
+
+            } else {
+                this.props.vibrationCode == '获取中' && this.setState({vibrationCode: '获取失败'})
+                this.setState({openCode: '获取失败'})
             }
-        }else if(sendType==='c'){
+        } else if (sendType === 'c') {
             if (len == 7) {
                 let card1 = [value[1], value[2], value[3]], card2 = [value[4], value[5], value[6]];
-                let card1Str = parseInt(card1.map((v) => Util.byteToHexString(v)).join(''), 16) + '';
-                let card2Str = parseInt(card2.map((v) => Util.byteToHexString(v)).join(''), 16) + ''
+                let card1Str = parseInt(card1.map((v) => Util.byteToHexString(v)).join(''), 16);
+                let card2Str = parseInt(card2.map((v) => Util.byteToHexString(v)).join(''), 16);
                 this.setState({closeCode: card1Str + '-' + card2Str})
-            }else{
-                this.setState({closeCode:'获取失败'})
+            } else {
+                this.setState({closeCode: '获取失败'})
             }
-        }else{
+        } else {
 
         }
     }
@@ -129,7 +123,7 @@ export default class DeployPage extends Component {
             }
             if (ps) {
                 ps.insertEquipment(jsonParams).then(() => {
-                    DeviceEventEmitter.emit('savedEvent','');
+                    DeviceEventEmitter.emit('savedEvent', '');
                     inspType == 1 ? this.props.navigation.navigate(Constants.screen.ExtinguisherDeploy, {qrCode: qrCode}) : this.props.navigation.goBack();
                 }).catch((e) => {
                     ToastAndroid.show('保存失败', ToastAndroid.SHORT)
@@ -140,8 +134,8 @@ export default class DeployPage extends Component {
     }
 
     _sendVibrationCodeOrder() {
-        Util.sendBleCharData(this.state.bleAddress, 't').then(() => {
-            this.setState({vibrationCode: '获取中', sendType: 't'})
+        Util.sendBleCharData(this.state.bleAddress, 'o').then(() => {
+            this.setState({vibrationCode: '获取中', sendType: 'o'})
         })
     }
 

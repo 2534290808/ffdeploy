@@ -61,17 +61,8 @@ export default class InspPage extends Component {
     }
     _sendDeploy(rec) {
         let {inspType,title}=this.state;
-        if(inspType===2){
-            storage.load({key:'bleAddress'}).then(res=>{
-                Util.sendBleCharData(res,'b').then(()=>{
-                    this.props.navigation.navigate(Constants.screen.Deploy,{inspType,title,qrCode:rec.data})
-                    this._hideQrModal();
-                })
-            })
-        }else {
-            this.props.navigation.navigate(Constants.screen.Deploy, {inspType, title, qrCode: rec.data})
-            this._hideQrModal();
-        }
+        this.props.navigation.navigate(Constants.screen.Deploy,{inspType,title,qrCode:rec.data})
+        this._hideQrModal();
     }
     render() {
         let {qrVisible,typeVisible}=this.state;
