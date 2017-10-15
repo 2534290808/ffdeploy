@@ -72,11 +72,11 @@ export default class DeployPage extends Component {
                 let card1 = [value[1], value[2], value[3]], card2 = [value[4], value[5], value[6]];
                 let card1Str = parseInt(card1.map((v) => Util.byteToHexString(v)).join(''), 16);
                 let card2Str = parseInt(card2.map((v) => Util.byteToHexString(v)).join(''), 16);
-                this.props.vibrationCode == '获取中' && this.setState({vibrationCode: card2Str + card1Str})
+                this.state.vibrationCode == '获取中' && this.setState({vibrationCode: card2Str + card1Str})
                 this.setState({openCode: card1Str + '-' + card2Str})
 
             } else {
-                this.props.vibrationCode == '获取中' && this.setState({vibrationCode: '获取失败'})
+                this.state.vibrationCode == '获取中' && this.setState({vibrationCode: '获取失败'})
                 this.setState({openCode: '获取失败'})
             }
         } else if (sendType === 'c') {
