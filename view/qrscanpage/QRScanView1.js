@@ -29,7 +29,6 @@ export default class QRScanView1 extends Component {
                 renderBottomMenuView={() => {
                 }}
                 cornerColor={Constants.color.themeColor}
-                scanBarColor={Constants.image.scanBar}
                 //scanbarcolor={"#ffcc03"}
                 scanBarImage={Constants.image.scanBar}
                 hintTextStyle={{color:Constants.color.themeColor}}
