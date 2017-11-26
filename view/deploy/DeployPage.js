@@ -172,7 +172,7 @@ export default class DeployPage extends Component {
                                                                                   onValueChange={(value) => {
                                                                                       this.setState({sprayValue: value})
                                                                                   }} label='存在喷头'/></View> : <View>
-                            <ListItemSvg rightTitle={this.state.vibrationCode} leftIcon={
+                            <ListItemSvg rightTitle={this.state.vibrationCode.toString()} leftIcon={
                                 <IconSvg name="RFID"/>
                             } title="RFID" titleStyle={{marginLeft: 10}} rightIcon={
                                 <Button title="获取" containerViewStyle={{width: 70}}
