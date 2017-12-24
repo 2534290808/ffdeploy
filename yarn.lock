@@ -3739,6 +3739,10 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
+react-native-android-barcodescanner@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/react-native-android-barcodescanner/-/react-native-android-barcodescanner-0.1.5.tgz#17b4120a1136671641c291bcf672ecd8abc3f64c"
+
 react-native-animatable@^1.2.3:
   version "1.2.3"
   resolved "http://registry.npm.taobao.org/react-native-animatable/download/react-native-animatable-1.2.3.tgz#d0f0bd694833b934f3aaa1275739228b786ecb4b"
@@ -3753,15 +3757,14 @@ react-native-camera-roll-picker@~1.1.6:
   version "1.1.9"
   resolved "http://registry.npm.taobao.org/react-native-camera-roll-picker/download/react-native-camera-roll-picker-1.1.9.tgz#99bad3a9c117ad79e67044c420ce463ee18f29d3"
 
-react-native-camera@^0.10.0:
-  version "0.10.0"
-  resolved "http://registry.npm.taobao.org/react-native-camera/download/react-native-camera-0.10.0.tgz#5d973c9a8aab95f68aede395ba310eae0c3cecdd"
-  dependencies:
-    prop-types "^15.5.10"
-
 react-native-camera@^0.7.0:
   version "0.7.0"
   resolved "http://registry.npm.taobao.org/react-native-camera/download/react-native-camera-0.7.0.tgz#a033a80b73fb1d56c2459a829f65a6f8f1a7328c"
+
+"react-native-camera@file:./Lib/react-native-camera":
+  version "0.12.0"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-collapsible@^0.8.0:
   version "0.8.1"

@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
-import {QRScannerView} from 'ac-qrcode'
+import QRScannerView from 'react-native-android-barcodescanner'
 import Constants from '../../view/Constants'
 let qrback=0;
 export default class QRScanView1 extends Component {

@@ -3,6 +3,7 @@ package com.ffdeploy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.barcodescanner.RCTZBarCameraPackage;
 import it.innove.BleManagerPackage;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.horcrux.svg.SvgPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTZBarCameraPackage(),
             new BleManagerPackage(),
             new SplashScreenReactPackage(),
             new SvgPackage(),
